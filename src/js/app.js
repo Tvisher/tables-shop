@@ -22,7 +22,7 @@ if (phoneInputs) {
         $(input).mask("+7 (999) 999-99-99");
     });
 }
-// Анимауия отрисовки svg на главном экране
+// Анимация отрисовки svg на главном экране
 const mainSvgAnimationElement = document.querySelector('.main-screen__image svg');
 window.addEventListener('load', (e) => {
     mainSvgAnimationElement.classList.add('active');
@@ -64,6 +64,31 @@ const productCardSlider = new Swiper('.product__head', {
     },
     grabCursor: true
 });
+const reviewsSlider = new Swiper('.reviews__slider', {
+    modules: [Navigation],
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    speed: 900,
+    noSwipingClass: 'product__head',
+    slidesPerView: 1,
+    spaceBetween: 10,
+    breakpoints: {
+        768: {
+            slidesPerView: 2,
+            spaceBetween: 10
+        },
+        1124: {
+            slidesPerView: 3,
+            spaceBetween: 20
+        },
+        1600: {
+            slidesPerView: 4,
+            spaceBetween: 30
+        }
+    }
+});
 
 
 
@@ -90,3 +115,26 @@ AOS.init({
 
 });
 
+
+$(document).ready(function () {
+    $("[data-togle]").click(function () {
+        $(this).toggleClass('show');
+        $(this).siblings().slideToggle("slow", function () {
+        });
+    });
+});
+
+
+// Кнопка проматать к началу страницы
+const scrollToTop = document.querySelector('#scroll-to-top');
+window.addEventListener("scroll", (e) => {
+    if (window.pageYOffset > 150) {
+        scrollToTop.classList.add('show');
+    } else {
+        scrollToTop.classList.remove('show');
+    }
+});
+$(scrollToTop).click(function () {
+    $("html, body").animate({ scrollTop: 0 }, "fast");
+    return false;
+});
