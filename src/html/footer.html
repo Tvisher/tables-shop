@@ -1,0 +1,47 @@
+<footer class="footer">
+    <div class="footer__wrapper">
+        <div class="container">
+            <div class="footer__head">
+                <a href="" class="footer__link inst">@SKT-STOL</a>
+                <a href="" class="footer__link telegram">+7 (707) 442 31 60</a>
+                <a href="" class="footer__link whatsapp">+7 (707) 442 31 60</a>
+                <a href="" class="footer__link email">Mymail@domain.kz</a>
+            </div>
+            <div class="footer__body">
+                <div class="footer__block">
+                    <div class="footer__logo">
+                        <img src="@img/footer-logo.svg" alt="">
+                    </div>
+                    <div class="footer__copyright">© SKT 2012 - 2022</div>
+                </div>
+                <div class="footer__info">Не является публичной офертой</div>
+                <div class="footer__studio">
+                    Разработка и дизайн <a href="https://voxel.kz/">Voxel.kz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<button id="scroll-to-top">
+    <span>&#9650;</span>
+</button>
+<script>
+    // Пример работы открытия модалки с товаром
+    const modalProduct = document.querySelector('#modal-product');
+    document.body.addEventListener('click', (e) => {
+        let target = e.target;
+        if (target.closest('.product__btn')) {
+            modalProduct.classList.add('show');
+        }
+        if (modalProduct.classList.contains('show') && target.closest('#close-modal')) {
+            modalProduct.classList.remove('show');
+        }
+        if (modalProduct.classList.contains('show') && target.closest('#modal-product') && !target.closest('.modal-product__wrapper')) {
+            modalProduct.classList.remove('show');
+        }
+    })
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+<script src="js/app.min.js"></script>
+</body>

@@ -4,6 +4,9 @@ import './vendors/vendors.js';
 import Swiper, {
     Navigation,
     Pagination,
+    Thumbs,
+    EffectFade,
+    Mousewheel
 } from 'swiper';
 
 import AOS from 'aos';
@@ -88,6 +91,50 @@ const reviewsSlider = new Swiper('.reviews__slider', {
             spaceBetween: 30
         }
     }
+});
+
+
+const swiperGaleryThumbs = new Swiper(".galery__thumbs", {
+    modules: [Navigation, Thumbs, Mousewheel],
+    spaceBetween: 10,
+    slidesPerView: 3,
+    speed: 400,
+    watchSlidesProgress: true,
+    direction: 'vertical',
+    mousewheel: {
+        enabled: true,
+    },
+    // breakpoints: {
+    //     768: {
+    //         spaceBetween: 30,
+    //         direction: 'vertical',
+    //         slidesPerView: 3,
+
+    //     },
+    //     576: {
+    //         direction: 'horizontal',
+    //         slidesPerView: 3,
+    //         spaceBetween: 15,
+    //     },
+    // }
+});
+
+const swiperGalery = new Swiper(".galery__slider", {
+    modules: [Navigation, Thumbs, EffectFade],
+    allowTouchMove: false,
+    speed: 900,
+    effect: 'fade',
+    fadeEffect: {
+        crossFade: true
+    },
+    // navigation: {
+    //     nextEl: ".swiper-button-next-galery-section__slider",
+    //     prevEl: ".swiper-button-prev-galery-section__slider",
+    // },
+    thumbs: {
+        swiper: swiperGaleryThumbs,
+    },
+
 });
 
 
