@@ -97,26 +97,26 @@ const reviewsSlider = new Swiper('.reviews__slider', {
 const swiperGaleryThumbs = new Swiper(".galery__thumbs", {
     modules: [Navigation, Thumbs, Mousewheel],
     spaceBetween: 10,
-    slidesPerView: 3,
+    slidesPerView: 4,
     speed: 400,
     watchSlidesProgress: true,
-    direction: 'vertical',
+    direction: 'horizontal',
     mousewheel: {
         enabled: true,
     },
-    // breakpoints: {
-    //     768: {
-    //         spaceBetween: 30,
-    //         direction: 'vertical',
-    //         slidesPerView: 3,
+    breakpoints: {
+        768: {
+            spaceBetween: 10,
+            direction: 'vertical',
+            slidesPerView: 3,
 
-    //     },
-    //     576: {
-    //         direction: 'horizontal',
-    //         slidesPerView: 3,
-    //         spaceBetween: 15,
-    //     },
-    // }
+        },
+        // 576: {
+        //     direction: 'horizontal',
+        //     slidesPerView: 3,
+        //     spaceBetween: 15,
+        // },
+    }
 });
 
 const swiperGalery = new Swiper(".galery__slider", {
@@ -127,10 +127,7 @@ const swiperGalery = new Swiper(".galery__slider", {
     fadeEffect: {
         crossFade: true
     },
-    // navigation: {
-    //     nextEl: ".swiper-button-next-galery-section__slider",
-    //     prevEl: ".swiper-button-prev-galery-section__slider",
-    // },
+
     thumbs: {
         swiper: swiperGaleryThumbs,
     },
@@ -152,9 +149,9 @@ AOS.init({
 
 
     // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
-    offset: 120, // offset (in px) from the original trigger point
+    offset: 30, // offset (in px) from the original trigger point
     delay: 0, // values from 0 to 3000, with step 50ms
-    duration: 400, // values from 0 to 3000, with step 50ms
+    duration: 1200, // values from 0 to 3000, with step 50ms
     easing: 'ease', // default easing for AOS animations
     once: false, // whether animation should happen only once - while scrolling down
     mirror: false, // whether elements should animate out while scrolling past them
@@ -184,4 +181,28 @@ window.addEventListener("scroll", (e) => {
 $(scrollToTop).click(function () {
     $("html, body").animate({ scrollTop: 0 }, "fast");
     return false;
+});
+
+
+
+const burgerBtn = document.querySelector('[data-open-menu]');
+const mobileMenu = document.querySelector('#mobile-menu');
+burgerBtn.addEventListener("click", (e) => {
+    mobileMenu.classList.toggle('active');
+    burgerBtn.classList.toggle('active');
+    document.body.classList.toggle('hidden');
+});
+
+
+const menuLinks = mobileMenu.querySelectorAll('a');
+menuLinks.forEach(link => {
+    link.onclick = (e) => {
+        if (mobileMenu.classList.contains('active')) {
+            setTimeout(() => {
+                mobileMenu.classList.remove('active');
+                burgerBtn.classList.remove('active');
+                document.body.classList.remove('hidden');
+            }, 0);
+        }
+    };
 });

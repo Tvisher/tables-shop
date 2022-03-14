@@ -1,0 +1,25 @@
+@@include('./html/head.html',{
+"title": "404"
+})
+@@include('./html/modal-product.html')
+
+<body>
+    @@include('./html/header.html')
+
+    <main class="main">
+        <section class="error-page">
+            <div class="container">
+                <div class="error-page__wrapper">
+                    <div class="error-page__img" data-aos="fade-in">
+                        <img src="@img/404-img.png" alt="">
+                    </div>
+                    <div class="error-page__content">
+                        <h1 class="main-screen__title" data-aos="fade-in" data-wow-delay="0">Упс, такой страницы нет</h1>
+                        <span class="main-screen__desc" data-aos="fade-in" data-wow-delay="500">Возможно ее никогда и небыло...</span>
+                        <a href="index.html" class="main-screen__link" data-aos="fade-in" data-wow-delay="1000">Главная страница</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    @@include("./html/footer.html")
