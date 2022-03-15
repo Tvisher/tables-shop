@@ -189,9 +189,13 @@ section {
   margin-bottom: 10px;
   a {
     color:$brand-gray;
+    transition: color .3s ease;
   }
   &:not(:last-child) {
     margin-right: 30px;
+  }
+  &:hover {
+    a{ color:$mainFontColor}
   }
 }
 .header__nav {
@@ -208,13 +212,36 @@ section {
   justify-content: flex-start;
 }
 .page-nav__item {
+  position: relative;
+  overflow: hidden;
   text-transform: uppercase;
   font-size: 14px;
-  a {
-    font-weight: 500;
+  padding: 5px 15px;
+  border-radius: 5px;
+  &:before {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-color: $mainFontColor;
+    height: 100%;
+    transform: translateX(-110%) rotate(-25deg);
+    transition: transform .5s ease;
   }
-  &:not(:last-child) {
-    margin-right: 32px;
+  &:hover {
+    &:before {
+      transform: translateX(0%) rotate(0deg);
+    }
+    a {
+      color: #fff;
+    }
+  }
+
+  a {
+    transition: color .6s ease-in-out;
+    font-weight: 500;
   }
 }
 

@@ -31,6 +31,8 @@ window.addEventListener('load', (e) => {
     mainSvgAnimationElement.classList.add('active');
 });
 
+
+// Слайдеры
 const tableSentenceSlider = new Swiper('.products__slider', {
     modules: [Navigation],
     navigation: {
@@ -92,8 +94,6 @@ const reviewsSlider = new Swiper('.reviews__slider', {
         }
     }
 });
-
-
 const swiperGaleryThumbs = new Swiper(".galery__thumbs", {
     modules: [Navigation, Thumbs, Mousewheel],
     spaceBetween: 10,
@@ -111,14 +111,8 @@ const swiperGaleryThumbs = new Swiper(".galery__thumbs", {
             slidesPerView: 3,
 
         },
-        // 576: {
-        //     direction: 'horizontal',
-        //     slidesPerView: 3,
-        //     spaceBetween: 15,
-        // },
     }
 });
-
 const swiperGalery = new Swiper(".galery__slider", {
     modules: [Navigation, Thumbs, EffectFade],
     allowTouchMove: false,
@@ -127,15 +121,13 @@ const swiperGalery = new Swiper(".galery__slider", {
     fadeEffect: {
         crossFade: true
     },
-
     thumbs: {
         swiper: swiperGaleryThumbs,
     },
-
 });
 
 
-
+//анимации
 AOS.init({
     // Global settings:
     disable: false, // accepts following values: 'phone', 'tablet', 'mobile', boolean, expression or function
@@ -146,20 +138,17 @@ AOS.init({
     disableMutationObserver: false, // disables automatic mutations' detections (advanced)
     debounceDelay: 50, // the delay on debounce used while resizing window (advanced)
     throttleDelay: 99, // the delay on throttle used while scrolling the page (advanced)
-
-
     // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
     offset: 30, // offset (in px) from the original trigger point
     delay: 0, // values from 0 to 3000, with step 50ms
-    duration: 1200, // values from 0 to 3000, with step 50ms
+    duration: 1400, // values from 0 to 3000, with step 50ms
     easing: 'ease', // default easing for AOS animations
-    once: false, // whether animation should happen only once - while scrolling down
+    once: true, // whether animation should happen only once - while scrolling down
     mirror: false, // whether elements should animate out while scrolling past them
     anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
 
 });
-
-
+// Акардеоны секции faq
 $(document).ready(function () {
     $("[data-togle]").click(function () {
         $(this).toggleClass('show');
@@ -169,7 +158,7 @@ $(document).ready(function () {
 });
 
 
-// Кнопка проматать к началу страницы
+// Кнопка промотать к началу страницы
 const scrollToTop = document.querySelector('#scroll-to-top');
 window.addEventListener("scroll", (e) => {
     if (window.pageYOffset > 150) {
@@ -185,24 +174,26 @@ $(scrollToTop).click(function () {
 
 
 
-const burgerBtn = document.querySelector('[data-open-menu]');
-const mobileMenu = document.querySelector('#mobile-menu');
-burgerBtn.addEventListener("click", (e) => {
-    mobileMenu.classList.toggle('active');
-    burgerBtn.classList.toggle('active');
-    document.body.classList.toggle('hidden');
-});
+// логика работы меню(открытие,закрытие, нажатие на ссылки)
+(function () {
+    const burgerBtn = document.querySelector('[data-open-menu]');
+    const mobileMenu = document.querySelector('#mobile-menu');
+    burgerBtn.addEventListener("click", (e) => {
+        mobileMenu.classList.toggle('active');
+        burgerBtn.classList.toggle('active');
+        document.body.classList.toggle('hidden');
+    });
 
-
-const menuLinks = mobileMenu.querySelectorAll('a');
-menuLinks.forEach(link => {
-    link.onclick = (e) => {
-        if (mobileMenu.classList.contains('active')) {
-            setTimeout(() => {
-                mobileMenu.classList.remove('active');
-                burgerBtn.classList.remove('active');
-                document.body.classList.remove('hidden');
-            }, 0);
-        }
-    };
-});
+    const menuLinks = mobileMenu.querySelectorAll('a');
+    menuLinks.forEach(link => {
+        link.onclick = (e) => {
+            if (mobileMenu.classList.contains('active')) {
+                setTimeout(() => {
+                    mobileMenu.classList.remove('active');
+                    burgerBtn.classList.remove('active');
+                    document.body.classList.remove('hidden');
+                }, 0);
+            }
+        };
+    });
+}());
