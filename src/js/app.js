@@ -28,7 +28,8 @@ if (phoneInputs) {
 // Анимация отрисовки svg на главном экране
 const mainSvgAnimationElement = document.querySelector('.main-screen__image svg');
 window.addEventListener('load', (e) => {
-    mainSvgAnimationElement.classList.add('active');
+
+    mainSvgAnimationElement && mainSvgAnimationElement.classList.add('active');
 });
 
 
@@ -107,15 +108,11 @@ const swiperGaleryThumbs = new Swiper(".galery__thumbs", {
     breakpoints: {
         768: {
             spaceBetween: 10,
-            direction: 'vertical',
-            slidesPerView: 3,
-
         },
     }
 });
 const swiperGalery = new Swiper(".galery__slider", {
     modules: [Navigation, Thumbs, EffectFade],
-    allowTouchMove: false,
     speed: 900,
     effect: 'fade',
     fadeEffect: {
@@ -160,11 +157,15 @@ $(document).ready(function () {
 
 // Кнопка промотать к началу страницы
 const scrollToTop = document.querySelector('#scroll-to-top');
+const flyingMenu = document.querySelector('#flying-menu');
+
 window.addEventListener("scroll", (e) => {
     if (window.pageYOffset > 150) {
         scrollToTop.classList.add('show');
+        flyingMenu.classList.add('show');
     } else {
         scrollToTop.classList.remove('show');
+        flyingMenu.classList.remove('show');
     }
 });
 $(scrollToTop).click(function () {
@@ -183,7 +184,6 @@ $(scrollToTop).click(function () {
         burgerBtn.classList.toggle('active');
         document.body.classList.toggle('hidden');
     });
-
     const menuLinks = mobileMenu.querySelectorAll('a');
     menuLinks.forEach(link => {
         link.onclick = (e) => {
@@ -197,3 +197,17 @@ $(scrollToTop).click(function () {
         };
     });
 }());
+
+
+// Функция делящая заголовок на спаны с анимацией
+(function () {
+    const mainTitle = document.querySelector('.main-screen__title');
+    if (mainTitle) {
+        let textToArray = mainTitle.textContent.trim().split(' ');
+        mainTitle.innerHTML = '';
+        textToArray
+            .map((word, index) => `<span data-aos="fade-in" data-aos-delay="${index * 2 * 150}" >${word}</span>`)
+            .forEach(item => mainTitle.innerHTML += item);
+    }
+}());
+
