@@ -28,16 +28,31 @@
 <script>
     // Пример работы открытия модалки с товаром
     const modalProduct = document.querySelector('#modal-product');
+    const thumbvideo = modalProduct.querySelector('#thumb-video');
+    const gaveryVideo = document.querySelector('#gavery-video');
+
     document.body.addEventListener('click', (e) => {
         let target = e.target;
         if (target.closest('.product__btn')) {
             modalProduct.classList.add('show');
+            thumbvideo.play();
         }
         if (modalProduct.classList.contains('show') && target.closest('#close-modal')) {
             modalProduct.classList.remove('show');
+            thumbvideo.pause();
+            gaveryVideo.pause();
         }
         if (modalProduct.classList.contains('show') && target.closest('#modal-product') && !target.closest('.modal-product__wrapper')) {
             modalProduct.classList.remove('show');
+            thumbvideo.pause();
+            gaveryVideo.pause();
+        }
+        if (target.closest('#thumb-video')) {
+            thumbvideo.pause();
+            gaveryVideo.play();
+        }
+        if (target.closest('.galery__thumbs .swiper-slide') && !target.closest('#thumb-video')) {
+            gaveryVideo.pause();
         }
     })
 </script>

@@ -146,7 +146,7 @@ section {
   z-index: 10;
   position: fixed;
   left: -100%;
-  top: 60px;
+  top: 72px;
   background-color: #fff;
   height: 100%;
   width: 90%;
@@ -184,19 +184,39 @@ section {
   border-bottom: 1px solid #26292F;
 }
 .header__burger {
+  position: relative;
   display: none;
   span {
-    transition: transform .4s ease-in-out;
+    will-change: transform;
+    position: relative;
+    transition: transform .5s ease-in-out,
+      opacity .5s ease-in-out,
+      background-color .4s ease-in-out,
+      height .6s ease-in-out,
+      border-radius .6s ease;
+  }
+  span:nth-of-type(2) {
+    position: absolute;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top:50%;
+    transform: translateY(-50%);
   }
   &.active {
     span:nth-of-type(1) {
-      transform: rotate(45deg) translate(8px,8px)
+      z-index: 1;
+      transform: rotate(45deg) translate(7px,6px);
+      background-color:#fff;
     }
     span:nth-of-type(2) {
-      transform: translateX(-100px) scale(0);
+      height: 100%;
+      border-radius: 50%;
+      opacity: 1;
     }
     span:nth-of-type(3) {
-      transform: rotate(315deg) translate(8px,-7px);
+      transform: rotate(315deg) translate(7px,-7px);
+      background-color:#fff;
     }
   }
 }
@@ -436,6 +456,7 @@ section {
 }
 
 .main-screen__title {
+  opacity: 0;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 76px;
@@ -683,7 +704,6 @@ section {
     width: 100%;
     position: relative;
     background-color: rgba(0, 0, 0, 0.1);
-    // padding: 30px;
     .swiper-pagination-bullet {
       background-color:#F14635;
       opacity: 1;
@@ -694,6 +714,9 @@ section {
         background-color: $mainFontColor;
       }
     }
+  }
+  .swiper-pagination {
+    transition: transform .3s ease-in-out;
   }
   .sale,
   .bank {
@@ -729,13 +752,18 @@ section {
     }
   }
   .img__wrapper {
-    // height: 240px;
     width: 100%;
     overflow: hidden;
     img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      object-position: center;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       object-position: center;
     }
     transition: opacity .4s ease-in-out;
@@ -1197,7 +1225,7 @@ section {
     font-size .4s ease;
   position: fixed;
   right: 30px;
-  bottom: 30px;
+  bottom: 95px;
   border-radius: 50%;
   border:2px solid #fff;
   width: 50px;
@@ -1430,21 +1458,6 @@ section {
     }
     cursor: pointer;
     position: relative;
-    &.video {
-      &::before {
-        position: absolute;
-        content: '';
-        left: 50%;
-        top: 50%;
-        width: 50%;
-        height: 50%;
-        transform: translate(-50%,-50%);
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='71' height='76' viewBox='0 0 71 76' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg filter='url(%23filter0_d_907_2377)'%3e%3cpath d='M52 28.4013C56 30.7107 56 36.4842 52 38.7936L25 54.382C21 56.6914 16 53.8047 16 49.1859L16 18.0089C16 13.3901 21 10.5034 25 12.8128L52 28.4013Z' fill='white'/%3e%3c/g%3e%3cdefs%3e%3cfilter id='filter0_d_907_2377' x='0' y='0' width='71' height='75.1948' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3e%3cfeFlood flood-opacity='0' result='BackgroundImageFix'/%3e%3cfeColorMatrix in='SourceAlpha' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0' result='hardAlpha'/%3e%3cfeOffset dy='4'/%3e%3cfeGaussianBlur stdDeviation='8'/%3e%3cfeComposite in2='hardAlpha' operator='out'/%3e%3cfeColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.55 0'/%3e%3cfeBlend mode='normal' in2='BackgroundImageFix' result='effect1_dropShadow_907_2377'/%3e%3cfeBlend mode='normal' in='SourceGraphic' in2='effect1_dropShadow_907_2377' result='shape'/%3e%3c/filter%3e%3c/defs%3e%3c/svg%3e ");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-      }
-    }
   }
   .img__wrap {
     width: 100%;
@@ -1453,6 +1466,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 8px;
     img {
       width: 100%;
       height: 100%;
@@ -1836,8 +1850,8 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 40px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
     span {
       width: 100%;
       height: 3px;
@@ -1982,6 +1996,12 @@ section {
 }
 
 @media (max-width: 576px) {
+  .phones.with_dropdown .dropdown__phones {
+    width: 240px;
+    .more_phone {
+      padding-left: 0;
+    }
+  }
   .breadcrumps__list {
     padding-top: 10px;
   }
@@ -1989,7 +2009,13 @@ section {
     top: 2px;
     right: 2px;
   }
-
+  .footer__link::before {
+    width: 20px;
+    height: 20px;
+  }
+  .footer__link {
+    padding-left: 30px;
+  }
   .table-sentence__desc{max-width: initial;}
 
   .modal-product__color {
@@ -2025,7 +2051,8 @@ section {
     margin-bottom: 10px;
   }
   .table-sentence {
-    padding: 25px 0;
+    padding-top:80px;
+    padding-bottom: 0;
   }
   #scroll-to-top {
     right: 10px;
@@ -2059,5 +2086,14 @@ section {
   .modal-product__size .size-value {
     padding: 5px;
     font-size: 12px;
+  }
+}
+
+@media (max-width: 414px) {
+  .mobile__mneu a {
+    font-size: 22px;
+  }
+  .mobile__mneu .list-item{
+    padding: 15px 0;
   }
 }

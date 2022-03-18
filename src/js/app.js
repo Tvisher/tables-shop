@@ -41,7 +41,7 @@ const tableSentenceSlider = new Swiper('.products__slider', {
         prevEl: '.swiper-button-prev',
     },
     speed: 900,
-    noSwipingClass: 'product__head',
+    noSwipingClass: 'no-swipe-el',
     slidesPerView: 1,
     spaceBetween: 10,
     breakpoints: {
@@ -68,7 +68,18 @@ const productCardSlider = new Swiper('.product__head', {
         type: 'bullets',
         clickable: true,
     },
-    grabCursor: true
+    grabCursor: true,
+    on: {
+        slideChange(e) {
+            const sliderPagination = e.pagination.$el[0];
+            const currentSlide = e.slides[e.activeIndex];
+            if (currentSlide.querySelector('video')) {
+                sliderPagination.style.transform = "translateY(200%)";
+            } else {
+                sliderPagination.style.transform = "translateY(0)";
+            }
+        }
+    }
 });
 const reviewsSlider = new Swiper('.reviews__slider', {
     modules: [Navigation],
@@ -119,6 +130,7 @@ const swiperGalery = new Swiper(".galery__slider", {
         crossFade: true
     },
     thumbs: {
+        autoScrollOffset: 1,
         swiper: swiperGaleryThumbs,
     },
 });
@@ -154,7 +166,6 @@ $(document).ready(function () {
     });
 });
 
-
 // Кнопка промотать к началу страницы
 const scrollToTop = document.querySelector('#scroll-to-top');
 const flyingMenu = document.querySelector('#flying-menu');
@@ -172,7 +183,6 @@ $(scrollToTop).click(function () {
     $("html, body").animate({ scrollTop: 0 }, "fast");
     return false;
 });
-
 
 
 // логика работы меню(открытие,закрытие, нажатие на ссылки)
@@ -198,7 +208,6 @@ $(scrollToTop).click(function () {
     });
 }());
 
-
 // Функция делящая заголовок на спаны с анимацией
 (function () {
     const mainTitle = document.querySelector('.main-screen__title');
@@ -208,6 +217,7 @@ $(scrollToTop).click(function () {
         textToArray
             .map((word, index) => `<span data-aos="fade-in" data-aos-delay="${index * 2 * 150}" >${word}</span>`)
             .forEach(item => mainTitle.innerHTML += item);
+        mainTitle.style.opacity = '1';
     }
 }());
 
