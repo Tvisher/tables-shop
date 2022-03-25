@@ -54,6 +54,29 @@
         if (target.closest('.galery__thumbs .swiper-slide') && !target.closest('#thumb-video')) {
             gaveryVideo.pause();
         }
+        //принцип работы подставления цены в модалке
+        if (target.closest('.size-input')) {
+            const sizeInput = target.closest('.size-input');
+            const itemPrice = sizeInput.dataset.price;
+            const itemCreditPrice = sizeInput.dataset.creditPrice;
+            const modalOutputPrice = document.querySelector('#modal-product [data-output-price]');
+            const modalOutputCreditPrice = document.querySelector('#modal-product [data-output-credit-price]');
+            modalOutputPrice.innerHTML = itemPrice ? itemPrice : '&#8734';
+            modalOutputCreditPrice.innerHTML = itemCreditPrice ? itemCreditPrice : '&#8734';
+        }
+
+        if (target.closest('.color-input')) {
+            const colorInput = target.closest('.color-input');
+            const imageSrc = colorInput.dataset.imageSrc;
+            if (imageSrc) {
+                const largeSlideImgContainer = document.querySelector('.galery__slider .swiper-slide img');
+                const litleSlideImgContainer = document.querySelector('.galery__thumbs .swiper-slide img');
+                largeSlideImgContainer.src = imageSrc ? imageSrc : largeSlideImgContainer.src;
+                litleSlideImgContainer.src = imageSrc ? imageSrc : litleSlideImgContainer.src;
+                document.querySelector('.galery__thumbs').swiper.slideTo(0, 400);
+                document.querySelector('.galery__slider').swiper.slideTo(0, 400);
+            }
+        }
     })
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>

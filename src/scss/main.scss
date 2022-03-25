@@ -566,6 +566,9 @@ section {
     margin-bottom: 0;
     max-width: 200px;
     margin-right: 10px;
+    .descriptor {
+      font-size: 8px;
+    }
   }
   .header__phones {
     flex: 0 0 auto;
@@ -855,9 +858,11 @@ section {
   .credit {
     color: $desc-color;
     font-size: 14px;
+    span {
+      display: inline;
+    }
   }
   .product__btn {
-    // margin-left: 10px;
     color: #26292F;
     width: 100%;
     border: 2px solid #26292F;
