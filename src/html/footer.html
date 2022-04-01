@@ -32,8 +32,11 @@
     const gaveryVideo = document.querySelector('#gavery-video');
 
     document.body.addEventListener('click', (e) => {
+
         let target = e.target;
         if (target.closest('.product__btn')) {
+            window.swiperGaleryThumbs.init();
+            window.swiperGalery.init();
             modalProduct.classList.add('show');
             thumbvideo.play();
         }

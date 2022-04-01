@@ -106,34 +106,45 @@ const reviewsSlider = new Swiper('.reviews__slider', {
         }
     }
 });
-const swiperGaleryThumbs = new Swiper(".galery__thumbs", {
-    modules: [Navigation, Thumbs, Mousewheel],
-    spaceBetween: 10,
-    slidesPerView: 4,
-    speed: 400,
-    watchSlidesProgress: true,
-    direction: 'horizontal',
-    mousewheel: {
-        enabled: true,
-    },
-    breakpoints: {
-        768: {
-            spaceBetween: 10,
+
+window.sliderinit = function () {
+    window.swiperGaleryThumbs = new Swiper(".galery__thumbs", {
+        modules: [Navigation, Thumbs, Mousewheel],
+        observer: true,
+        observeSlideChildren: true,
+        observeParents: true,
+        // init: false,
+        spaceBetween: 10,
+        slidesPerView: 4,
+        speed: 400,
+        watchSlidesProgress: true,
+        direction: 'horizontal',
+        mousewheel: {
+            enabled: true,
         },
-    }
-});
-const swiperGalery = new Swiper(".galery__slider", {
-    modules: [Navigation, Thumbs, EffectFade],
-    speed: 900,
-    effect: 'fade',
-    fadeEffect: {
-        crossFade: true
-    },
-    thumbs: {
-        autoScrollOffset: 1,
-        swiper: swiperGaleryThumbs,
-    },
-});
+        breakpoints: {
+            768: {
+                spaceBetween: 10,
+            },
+        }
+    });
+    window.swiperGalery = new Swiper(".galery__slider", {
+        modules: [Navigation, Thumbs, EffectFade],
+        observer: true,
+        observeSlideChildren: true,
+        observeParents: true,
+        // init: false,
+        speed: 900,
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        },
+        thumbs: {
+            autoScrollOffset: 1,
+            swiper: window.swiperGaleryThumbs,
+        },
+    });
+}
 
 
 //анимации
